@@ -1,0 +1,33 @@
+<mat-card class="card-margin">
+    <div fxLayout="row">
+      <h1 fxFlex="50" style="font-weight:bold;">Compare Query</h1>
+      <div fxFlex="50" fxLayoutAlign="end start"><button mat-raised-button  [routerLink]="['/query']" >New Query</button></div>
+    </div>
+        <mat-expansion-panel class="panel-margin">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Declarative SQL Query
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        <p>{{'Query 1:' + query1}}</p>
+        <p>{{'Query 2:' + query2}}</p>
+        </mat-expansion-panel>
+       <h2 style="margin-top: 10px;">Changes Explained</h2> 
+       <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let index of[1,2,3,4,5,6,7,8,9,10]">{{index + '.'}}</mat-list-item>
+      </mat-list>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+           Query Execution Plan
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-radio-group aria-label="Select an option" class="radio-button" (change)="changeTree($event)">
+            <mat-radio-button [checked]="true" value="Q1" style="padding-right:10px;">Query 1</mat-radio-button>
+            <mat-radio-button value="Q2">Query 2</mat-radio-button>
+          </mat-radio-group>
+        <div id="chartdiv1" [fxHide]="!isTree1"></div>
+        <div id="chartdiv2" [fxHide]="isTree1"></div>
+      </mat-expansion-panel>
+
+  </mat-card>

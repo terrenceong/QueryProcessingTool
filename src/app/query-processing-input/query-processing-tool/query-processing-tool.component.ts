@@ -27,9 +27,8 @@ export class QueryProcessingToolComponent implements OnInit {
     this.isSingleQuery = !event.checked;
   }
   sendQuery(){
-    console.log(this.queryFormGroup.get('querySingleSelect').value);
     // call API using service class
-    let tree:Item[] = [{operator:"Projection",content:"empty",
+    let tree1:Item[] = [{operator:"Projection",content:"empty",
     inputs:[
       {operator:"Hash Join",content:"empty",
       inputs:[
@@ -41,7 +40,22 @@ export class QueryProcessingToolComponent implements OnInit {
       ]}
     ]}];
 
-    this.router.navigateByUrl('/query/queryResult',{state:[tree,["description"]]});
+    let tree2:Item[] = [{operator:"Projection",content:"empty",
+    inputs:[
+      {operator:"Sort M Join",content:"empty",
+      inputs:[
+        {operator:"Selection",content:"ID=1",
+        inputs:[
+          {operator:"Seq Scan",content:"Relation A"}
+        ]},
+        {operator: "Index Scan",content:"Relation B"}
+      ]}
+    ]}];
+    if(this.isSingleQuery){
+      this.router.navigateByUrl('/query/result',{state:[tree1,["description"]]});
+    }else{
+      this.router.navigateByUrl('/query/compare',{state:[tree1,tree2,["description"]]});
+    }
   }
 
 }

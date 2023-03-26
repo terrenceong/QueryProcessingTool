@@ -21,12 +21,16 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import { TreeComponent } from './query-processing-tree/tree/tree.component';
+import { DifferencesComponent } from './query-processing-result/differences/differences.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { QueryService } from './query.service';
 @NgModule({
   declarations: [
     AppComponent,
     QueryProcessingToolComponent,
     ResultComponent,
     TreeComponent,
+    DifferencesComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -47,9 +51,10 @@ import { TreeComponent } from './query-processing-tree/tree/tree.component';
     MatExpansionModule,
     MatListModule,
     MatTabsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatRadioModule
   ],
-  providers: [],
+  providers: [QueryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
