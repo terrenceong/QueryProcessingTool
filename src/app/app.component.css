@@ -1,0 +1,19 @@
+.title{
+    font-size: 40px;
+    margin: 0px 0 10px 0;
+    font-family :'RocknRoll One',Helvetica,Arial,Lucida,sans-serif;
+}
+mat-toolbar{
+    background-color: #424242;
+    padding: 10px 0 10px 0;
+}
+.container{
+    font-family:  monospace;
+    font-size:20px;
+    color:white;
+}
+.card-footer{
+    margin: 20px 20px 5px 20px;
+    font-size: 14px;
+}
+
