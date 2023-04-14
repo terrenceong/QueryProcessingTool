@@ -11,3 +11,7 @@
     height: 50rem;
     font-size: large;
 }
+.summary-item{
+    padding: 10px 5px 10px 5px;
+    font-size: 16px;
+}

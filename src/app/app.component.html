@@ -2,7 +2,10 @@
 <mat-toolbar fxLayout="row wrap" class="title">
     <div fxFlex="5"></div>
     <div fxFlex="95">
-       <span fxFlex="100"><img src="../assets/Icon.png" [routerLink]="['/query']"  style="height: 35px;">{{' ' + title}}</span>
+       <span [fxHide.lt-md]="true" fxFlex="100"><img src="../assets/Icon.png" [routerLink]="['/query']"  style="height: 35px;">&nbsp;
+    Query-Processing-Tool</span>
+    <span fxHide [fxShow.lt-md]="true" fxFlex="100"><img src="../assets/Icon.png" [routerLink]="['/query']"  style="height: 35px;">&nbsp;
+        QPT</span>
     </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

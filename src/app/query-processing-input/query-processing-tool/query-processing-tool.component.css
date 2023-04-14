@@ -3,6 +3,7 @@
 }
 .card-component-margin{
     margin-left: 50px;
+    margin-right:50px;
 }
 .btn-color{
     background-color: #ff9999;
@@ -32,6 +33,9 @@
 ::ng-deep.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
     background-color: #ff9999;
 }
+::ng-deep.mat-slide-toggle-content.mat-slide-toggle-content{
+  overflow: inherit;
+}
 /* ::ng-deep.mat-option:hover {
      background: #ff9999 !important;
 } */
@@ -59,6 +63,7 @@
     font-size: 25px;
     font-weight: bold;
     padding-top: 25px;
+    padding-bottom :5px;
   }
   .theme-color-pink{
      color: #ff9999;

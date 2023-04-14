@@ -3,7 +3,8 @@
       <h1 fxFlex="50" style="font-weight:bold;">Compare Query</h1>
       <div fxFlex="50" fxLayoutAlign="end start"><button mat-raised-button  [routerLink]="['/query']" >New Query</button></div>
     </div>
-        <mat-expansion-panel class="panel-margin">
+        <div fxLayout="row wrap">
+        <mat-expansion-panel class="panel-margin" [expanded]="true" fxFlex="100">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Declarative SQL Query
@@ -12,11 +13,32 @@
         <p>{{'Query 1:' + query1}}</p>
         <p>{{'Query 2:' + query2}}</p>
         </mat-expansion-panel>
-       <h2 style="margin-top: 10px;">Changes Explained</h2> 
+       <h1 style="margin-top: 10px;" fxFlex="100">Changes Explained</h1>
+          <h3 fxFlex="100">Legend:&nbsp; </h3>
+          <div fxFlex="100" fxLayoutAlign="start start">
+            <h3 fxFlex="5" style="background-color: #DC143C;">&nbsp;</h3><h3 fxFlex="30">&nbsp;Removed</h3>
+          </div>
+          <div fxFlex="100">
+            <h3 fxFlex="5" style="background-color: #6cc644;"></h3><h3 fxFlex="30">&nbsp;Inserted</h3>
+          </div>
+          <div fxFlex="100">
+            <h3 fxFlex="5" style="background-color: #3A989A;"></h3><h3 fxFlex="30">&nbsp;Replaced</h3>
+          </div>
+       <div fxFlex="50" fxFlex.lt-md="100">
+        <h3>Query 1:</h3>
        <mat-list role="list">
-        <mat-list-item role="listitem" *ngFor="let index of[1,2,3,4,5,6,7,8,9,10]">{{index + '.'}}</mat-list-item>
+        <mat-list-item role="listitem" *ngFor="let description1 of this.description1; index as i" [ngStyle]="{'background-color': this.identifyAndHightLightOne(i)}">{{(i+1) + '.' + description1}}</mat-list-item>
       </mat-list>
-      <mat-expansion-panel [expanded]="true">
+     </div> 
+     <div fxFlex="50" fxFlex.lt-md="100">
+      <h3>Query 2:</h3>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let description2 of this.description2; index as j" [ngStyle]="{'background-color': this.identifyAndHightLightTwo(j)}">{{(j+1) + '.' + description2}}</mat-list-item>
+      </mat-list>
+     </div>
+     <h1 fxFlex="100" style="padding-top: 10px;">Summary</h1>
+     <div fxFlex="100" class="summary-item" *ngFor="let summary of this.compareSummaryMap |keyvalue">{{summary.value}}</div>
+      <mat-expansion-panel [expanded]="true" fxFlex="100">
         <mat-expansion-panel-header>
           <mat-panel-title>
            Query Execution Plan
@@ -29,5 +51,5 @@
         <div id="chartdiv1" [fxHide]="!isTree1"></div>
         <div id="chartdiv2" [fxHide]="isTree1"></div>
       </mat-expansion-panel>
-
+    </div>
   </mat-card>

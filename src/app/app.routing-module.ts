@@ -8,7 +8,9 @@ import { ResultComponent } from "./query-processing-result/result/result.compone
 const appRoutes:Routes = [{path: '',redirectTo:'/query' ,pathMatch: 'full'},
 {path: 'query',component:QueryProcessingToolComponent},
 {path: 'query/result',component:ResultComponent},
-{path: 'query/compare',component:DifferencesComponent}]
+{path: 'query/compare',component:DifferencesComponent},
+{path: '**',component:QueryProcessingToolComponent},
+]
 
 
 @NgModule({

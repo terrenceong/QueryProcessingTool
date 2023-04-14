@@ -11,11 +11,12 @@ export class ResultComponent implements OnInit {
   data:any;
   description:string[];
   tree:any;
-  constructor(private router:Router, private activatedRoute:ActivatedRoute,
-    private queryService:QueryService) {
+  constructor(private router:Router, private activatedRoute:ActivatedRoute) {
     this.data = this.router.getCurrentNavigation().extras.state;
-    this.tree = this.data[0];
-    this.description = this.data[1];
+    this.query = this.data[0];
+    this.tree = this.data[1];
+    this.description = this.data[2];
+  
    }
 
   ngOnInit(): void {

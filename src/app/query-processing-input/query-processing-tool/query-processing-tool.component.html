@@ -1,45 +1,51 @@
 <mat-card class="card-margin">
     <div style="margin-top: 80px" fxLayout="row wrap" fxLayoutAlign="start center">
-        <mat-slide-toggle class="mat-toggle" (change)="toggleChanged($event)">Compare Query</mat-slide-toggle>
+        <mat-slide-toggle class="mat-toggle" (change)="toggleChanged($event)">Single Query</mat-slide-toggle>
     </div>
     <form [formGroup]="queryFormGroup" class="card-component-margin" fxLayout="row wrap">
         <div *ngIf="isSingleQuery" fxFlex="100" fxLayout="row wrap">
-        <div fxFlex="50" class="query-heading">Enter your Query</div>
-        <mat-form-field fxFlex="50" fxLayoutAlign="end start">
+        <div fxFlex="50" fxFlex.lt-md="100" class="query-heading">Enter your Query</div>
+        <mat-form-field fxFlex="50" fxLayoutAlign="end start" fxFlex.lt-md="100" fxLayoutAlign.lt-md="start start">
             <mat-label>Sample Query</mat-label>
-            <mat-select formControlName="querySingleSelect">
+            <mat-select formControlName="querySingleSelect" (selectionChange)="singleQuerySelection($event)">
               <mat-option [value]="0">None</mat-option>
-              <mat-option *ngFor="let index of[1,2,3,4,5,6,7,8,9,10]" [value]="index">{{ 'Query ' + index}}</mat-option>
+              <mat-option *ngFor="let index of[1,2,3,4,5,6,7]" [value]="index">{{ 'Sample ' + index}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field fxFlex="100" floatLabel="never" color="accent" appearance="outline">
-            <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM CUSTOMERS WHERE ID=1" formControlName="querySingle"></textarea>
+            <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM CUSTOMERS WHERE custkey = 1;" formControlName="querySingle"></textarea>
         </mat-form-field>
         </div>
         <div *ngIf="!isSingleQuery" fxFlex="100" fxLayout="row wrap">
-            <div fxFlex="25" class="query-heading">Query 1</div>
-            <mat-form-field fxFlex="25" fxLayoutAlign="end start" style="padding-right: 10px;">
+            <div fxFlex="50" fxLayout="row wrap" fxFlex.lt-md="100">
+            <div fxFlex="50"  class="query-heading" fxFlex.lt-md="100">Query 1</div>
+            <mat-form-field fxFlex="50" fxLayoutAlign="end start" fxFlex.lt-md="100" fxLayoutAlign.lt-md="start start"
+             style="padding-right: 10px;">
                 <mat-label>Sample Query 1</mat-label>
-                <mat-select formControlName="queryOneSelect">
+                <mat-select formControlName="queryOneSelect" (selectionChange)="compareQueryOneSelection($event)">
                 <mat-option [value]="0">None</mat-option>
-                <mat-option *ngFor="let index of[1,2,3,4,5,6,7,8,9,10]" [value]="index">{{ 'Query ' + index}}</mat-option>
+                <mat-option *ngFor="let index of[1,2,3,4,5,6,7]" [value]="index">{{ 'Sample ' + index}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <div fxFlex="25" class="query-heading">Query 2</div>
-            <mat-form-field fxFlex="25" fxLayoutAlign="end start">
+            <mat-form-field fxFlex="100" floatLabel="never" color="accent" appearance="outline" class="innerFieldPadding">
+                <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM customer WHERE c_mktsegment = 'BUILDING';" formControlName="queryOne"></textarea>
+            </mat-form-field>
+            </div>
+            <div fxFlex="50" fxLayout="row wrap" fxFlex.lt-md="100">
+            <div fxFlex="50" class="query-heading" fxFlex.lt-md="100">Query 2</div>
+            <mat-form-field fxFlex="50" fxLayoutAlign="end start" fxFlex.lt-md="100" fxLayoutAlign.lt-md="start start">
                 <mat-label>Sample Query 2</mat-label>
-                <mat-select formControlName="queryTwoSelect">
+                <mat-select formControlName="queryTwoSelect" (selectionChange)="compareQueryTwoSelection($event)">
                 <mat-option [value]="0">None</mat-option>
-                <mat-option *ngFor="let index of[1,2,3,4,5,6,7,8,9,10]" [value]="index">{{ 'Query ' + index}}</mat-option>
+                <mat-option *ngFor="let index of[1,2,3,4,5,6,7]" [value]="index">{{ 'Sample ' + index + "'"}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field fxFlex="50" floatLabel="never" color="accent" appearance="outline" class="innerFieldPadding">
-                <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM CUSTOMERS WHERE ID=1" formControlName="queryOne"></textarea>
+            <mat-form-field fxFlex="100"  floatLabel="never" color="accent" appearance="outline">
+                <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM customer WHERE c_mktsegment = 'BUILDING' AND c_acctbal > 700;" formControlName="queryTwo"></textarea>
             </mat-form-field>
-            <mat-form-field fxFlex="50" floatLabel="never" color="accent" appearance="outline">
-                <textarea style="padding-top: 50px;" autosize matInput placeholder="SELECT * FROM CUSTOMERS WHERE ID=1 AND NAME='Terrence'" formControlName="queryTwo"></textarea>
-            </mat-form-field>
+            </div>
         </div>
-        <button mat-stroked-button class="btn-color" (click)="sendQuery()">{{ !isSingleQuery ? 'Compare':'Generate'}}</button>
+        <span fxFlex=100 style="font-size: 18px; margin-bottom: 10px;">Note: Select sample query x and sample query x' for preceding query</span>
+        <button mat-stroked-button [disabled]="validateSubmit()" class="btn-color" (click)="sendQuery()">{{ !isSingleQuery ? 'Compare':'Generate'}}</button>
     </form>
 </mat-card>

@@ -24,6 +24,10 @@ import { TreeComponent } from './query-processing-tree/tree/tree.component';
 import { DifferencesComponent } from './query-processing-result/differences/differences.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { QueryService } from './query.service';
+import { HttpClientModule} from '@angular/common/http'
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './app-config.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,9 +56,21 @@ import { QueryService } from './query.service';
     MatListModule,
     MatTabsModule,
     MatDividerModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
-  providers: [QueryService],
+  providers: [QueryService, {
+    provide: APP_INITIALIZER,
+    multi: true,
+    deps: [AppConfigService],
+    useFactory: (appConfigService: AppConfigService) => {
+      return () => {
+        //Make sure to return a promise!
+        return appConfigService.loadAppConfig();
+      };
+    }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

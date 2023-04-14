@@ -10,29 +10,36 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
   styleUrls: ['./differences.component.css']
 })
 export class DifferencesComponent implements OnInit {
-  query1:string = "SELECT * FROM CUSTOMER WHERE ID=1";
-  query2:string = "SELECT * FROM CUSTOMERS WHERE ID=1 AND NAME='Terrence'";
+  query1:string;
+  query2:string;
   data:any;
-  description:string[];
+  description1:string[];
+  description2:string[];
   tree1:any;
   tree2:any;
+  highLightDiffMap:Map<number,string>;
+  compareSummaryMap:Map<number,string>;
   isTree1:boolean = true;
   root1:any;
   root2:any;
   constructor(private router:Router, private activatedRoute:ActivatedRoute,private queryService:QueryService) {
     this.data = this.router.getCurrentNavigation().extras.state;
-    this.tree1 = this.data[0];
-    this.tree2 = this.data[1];
-    this.description = this.data[2];
-    this.root1= null;
+    this.query1 = this.data[0];
+    this.query2 = this.data[1];
+    this.tree1 = this.data[2];
+    this.tree2= this.data[3];
+    this.description1 = this.data[4];
+    this.description2 = this.data[5];
+    this.highLightDiffMap = this.data[6];
+    this.compareSummaryMap = this.data[7];
+    this.root1 = null;
     this.root2 = null;
    }
    ngOnInit(): void {
-       
+       console.log(this.highLightDiffMap);
    }
 
   ngAfterViewInit(): void {
-    console.log("After view init");
     //tree 1
     this.root1 = am5.Root.new("chartdiv1");
     this.root1.setThemes([
@@ -135,6 +142,30 @@ export class DifferencesComponent implements OnInit {
     series2.data.setAll(this.tree2);
     series2.set("selectedDataItem", series2.dataItems[0]);
   }
+  identifyAndHightLightTwo(index){
+    index+=1;
+    if(this.highLightDiffMap.has(index)){
+       if(this.highLightDiffMap.get(index)=='replace'){
+          return '#3A989A';
+       }
+       else if(this.highLightDiffMap.get(index)=='insert')
+       {
+          return '#6cc644'; 
+       }
+    }
+    return null;
+  }
+  identifyAndHightLightOne(index){
+    index+=1;
+    if(this.highLightDiffMap.has(index)){
+       if(this.highLightDiffMap.get(index)=='delete'){
+        {
+          return '#DC143C'
+        }
+    }
+    }
+    return null;
+}
   changeTree(event){
     this.isTree1 =  event.value == "Q1" ? true:false;
   }

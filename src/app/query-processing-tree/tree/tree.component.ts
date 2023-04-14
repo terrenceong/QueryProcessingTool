@@ -86,7 +86,8 @@ export class TreeComponent implements OnInit {
        });
        series.nodes.template.setAll({
          draggable: false,
-         tooltipText:"[bold]{operator} \n{content}"
+         tooltipText:"[bold]{operator} \n{content}",
+ 
        });
        series.labels.template.setAll({
          fontSize: 20,
