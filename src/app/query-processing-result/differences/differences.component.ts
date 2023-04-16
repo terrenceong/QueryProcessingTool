@@ -36,7 +36,7 @@ export class DifferencesComponent implements OnInit {
     this.root2 = null;
    }
    ngOnInit(): void {
-       console.log(this.highLightDiffMap);
+    
    }
 
   ngAfterViewInit(): void {

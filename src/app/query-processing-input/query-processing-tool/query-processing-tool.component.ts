@@ -151,7 +151,6 @@ highlightDifferenceMap = new Map<number,string>();
             this.processingQueryDifferences(differencesList);
             tree1.push(this.inOrderTraversal(data[0],0,));
             tree2.push(this.inOrderTraversal(data[1],1));
-            console.log(this.compareQuerySummary);
             this.router.navigateByUrl('/query/compare',{state:[queryDto.query1,queryDto.query2
               ,tree1,tree2,this.explanation[0],this.explanation[1],this.highlightDifferenceMap
             ,this.compareQuerySummary]});
